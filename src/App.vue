@@ -51,17 +51,11 @@ export default {
     }
 },
   created() {
-    this.getMess();
   },
   methods: {
     getMessage(params) {
       console.log(params)
     },
-    getMess() {
-      let arr = ['1','2','3','4']
-      const str = arr.join("")
-      console.log(str.split(","))
-    }
   }
 }
 </script>
