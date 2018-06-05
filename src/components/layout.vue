@@ -9,8 +9,14 @@
 			</div>
 			
 		</div>
-		<div class="content">content</div>
-		<div class="fotter">fotter</div>
+		<div class="content">
+			<keep-alive>
+				<router-view></router-view>
+			</keep-alive>	
+		</div>
+		<div class="fotter">
+			<p>© 2018  5月31号  creat by zhao </p>
+		</div>
 	</div>
 </template>
 <script>
@@ -67,8 +73,8 @@ table {
 
 .header{
 	width:100%;
-	height: 100px;
-	background: #ccc;
+	height: 90px;
+	background: #333;
 	
 }
 img{
@@ -84,8 +90,17 @@ img{
 
 }
 .app-login{
+	font-size: 20px;
+	color: #fff;
 	line-height: 100px;
 	width: 100px;
 	height: 100px;
+}
+.fotter{
+	width: 100%;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	background-color: #ccc;
 }
 </style>

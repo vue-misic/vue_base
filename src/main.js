@@ -3,6 +3,7 @@
 import Vue from 'vue'
 // import App from './App'
 import Layout from './components/layout'
+// import page from './page/index'
 import router from './router'
 
 Vue.config.productionTip = false
@@ -13,5 +14,6 @@ new Vue({
   router,
   // components: { App },
   // template: '<App/>'
+  //跟组件 => layout
   render: h => h(Layout)
 })
