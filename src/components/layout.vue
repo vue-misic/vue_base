@@ -1,20 +1,21 @@
 <template>
 	<div class="pc">
-		<div class="header">
-			<img src="../assets/logo.png" alt="">
-			<div class="wrapper">
-				<div class="app-login">登录</div>
-				<div class="app-login">注册</div>
-				<div class="app-login">退出</div>
-			</div>
-			
+		<div class="app-header">
+			<div class="app-head-inner">
+				<img src="../assets/logo.png" class="img" alt="">
+				<div class="head-nav">
+					<div class="app-login">登录</div>
+					<div class="app-login">注册</div>
+					<div class="app-login">退出</div>
+				</div>
+			</div>	
 		</div>
-		<div class="content">
+		<div class="app-content">
 			<keep-alive>
 				<router-view></router-view>
 			</keep-alive>	
 		</div>
-		<div class="fotter">
+		<div class="app-fotter">
 			<p>© 2018  5月31号  creat by zhao </p>
 		</div>
 	</div>
@@ -46,6 +47,8 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	text-decoration: none;
+
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -71,32 +74,39 @@ table {
 	border-spacing: 0;
 }
 
-.header{
+.app-header{
 	width:100%;
 	height: 90px;
-	background: #333;
+	line-height: 90px;
+	background: #363636;
+	color: #b2b2b2;
 	
 }
-img{
+.app-head-inner{
+	width: 1200px;
+	margin: 0 auto;
+}
+.img{
+	margin-top: 20px;
 	margin: 30px;
 	width: 50px;
-	height: 50px;
+/*	height: 50px; 图片设置宽他就会自己缩放，不要设置高*/
 }
-.wrapper{
+.head-nav{
 	float: right;
 	display: flex;
 	width: 300px;
 	height: 100%;
-
+	cursor: pointer;
 }
 .app-login{
-	font-size: 20px;
-	color: #fff;
+	font-size: 10px;
+	text-align: right;
 	line-height: 100px;
 	width: 100px;
 	height: 100px;
 }
-.fotter{
+.app-fotter{
 	width: 100%;
 	height: 80px;
 	line-height: 80px;
