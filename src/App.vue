@@ -60,7 +60,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+body{
+  background: #f0f2f5;
+  color: #444;
+  font-size: 14px;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

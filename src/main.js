@@ -5,6 +5,8 @@ import Vue from 'vue'
 import Layout from './components/layout'
 // import page from './page/index'
 import router from './router'
+import vueResource from 'vue-resource'
+Vue.use(vueResource)//不需要注册到Vue实例，它只是一个全局的方法(注册到了所有组件),不像router插件(特殊的组件而已)，他要与DOM交互，所以要注册
 
 Vue.config.productionTip = false
 
