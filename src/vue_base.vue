@@ -57,22 +57,15 @@
         12. 父子组件的数据传递方式   父级 -> 子级 props  (在子组件上自定义属性(不可以用驼峰命名)= 父级data里的数据)
                 props 在子组件里声明可以直接使用(像data里的数据一样使用)
                 1.props是数组 props:['my-val'] => 是字符串，在组件上定义什么就是什么 不转换myVal
-                  一般用于不需要有默认值的用 数组 字符串形式
                 2.props 是对象 props:{
                 	  'my-val': Number/[String/Object] 没有default时只定义内用内型
-	                  myVal:{ type: String,default: '100'} => myVal此刻充当变量
+	                  myVal:{ type: String,default: '100'}
                 }  需要转换为驼峰
-
-                需要有默认值的一般用对象 属性的形式
-
-
-
-
                                    子级 -> 父级 $emit $on (在子组件上 自定义事件v-on监听(不可以用驼峰命名,触发的事件必须完全匹配监听的事件名,不存在大小写转换,推荐始终使用 kebab-case 的事件名), 子组件浏览器事件去触发)
 
                 prop 是单项数据流, 子组件不可以更改父组件的值，不然会侦测不到数据的改变
 
-                父级 => 子级 prop 传递属性  子级 => 父级    $emit 发布
+                父级 => 子级 prop 传递属性  子级 => 父级 $emit 发布
 
         13.插槽 => slot 父组件向子组件分发模板内容( 父组件 => 子组件可以传递数据(prop)/模板(slot)) 例如：弹框组件
                    1.slot必须在子组件里定义，不然父组件传递，子组件不生效
@@ -91,7 +84,7 @@
 
         vue 高级功能
 
-        1.过渡/动画 (vue的transtion的出发 1.v-if/v-show 2.router的切换 3.动态组件的切换)
+        1.过渡/动画
 
 
         2.插件(vue-resource vue-router vuex) => 是独立于vue,拓展完善vue生态(库)，是一套完整的系统
@@ -176,6 +169,17 @@
                         当路由被点击会自动添加一个类(默认值"router-link-active") 链接激活时使用的 CSS 类名。默认值可以通过路由的构造选项 linkActiveClass 来全局配置
 
 
+      
+
+
+
+
+
+
+
+
+
+
           4.添加 Vue 实例方法，通过把它们添加到 Vue.prototype 上实现。
 
 
@@ -190,18 +194,7 @@
         npm run dev 启动项目
         npm run build 打包
      */
-     /*
-      mock数据，(json-server只能获取get请求)
-      npm install json-server --save
-      1.在build的目录下的server中添加数据配置
-      2.var jsonServer = require('json-server')
-      3.代理,在config里的index设置dev的代理访问api => 'http://localhost:8081'
-      4.在apiRouter也要进行api配置
 
-      图片的引入：webpack打包需require引入不然不认识
-      什么时候需要在(srcript标签里,data选项里引入的src) 可以理解为src是变量就需要require，不然webpack打包不认识
-      template&&css知道那是图片路径，但是js不知道是图片路径还是字符串，打包就会出问题
-      */
 	
 </script>
 </html>

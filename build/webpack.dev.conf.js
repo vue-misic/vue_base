@@ -9,18 +9,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-const jsonServer = require('json-server')
-
-//配置json-server Mock数据 注意监听的端口
-const apiServer = jsonServer.create()
-const apiRouter = jsonServer.router('db.json')
-const middlewares = jsonServer.defaults()
-apiServer.use(middlewares)
-apiServer.use('/api',apiRouter)
-apiServer.listen(config.dev.port + 1, () => {
-  console.log('JSON Server is running')
-})
-
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)

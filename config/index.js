@@ -10,12 +10,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    // proxyTable: {},
-    //做一个接口调用的代理
-    proxyTable: {
-        //访问api的时候访问的是8081 /api映射到了8081
-        '/api/': 'http://localhost:8081/'
-    },
+    proxyTable: {},
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
