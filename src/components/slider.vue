@@ -71,11 +71,13 @@
 			}
 		},
 		methods: {
+			//公用的切换方法
 			goto (index) {
 				this.isShow = false;
 				setTimeout(() => {
 					this.isShow = true
 					this.nowIndex = index;
+					// this.$emit('onchange',index);
 				}, 10);
 				
 			},

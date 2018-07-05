@@ -4,9 +4,9 @@
 			<div class="app-head-inner">
 				<img src="../assets/logo.png" class="img" alt="">
 				<div class="head-nav">
-					<div class="app-login">登录</div>
-					<div class="app-login">注册</div>
-					<div class="app-login">退出</div>
+					<div class="app-login" @click="logDialog">登录</div>
+					<div class="app-login" @click="regDialog">注册</div>
+					<div class="app-login" @click="aboutDialog">关于</div>
 				</div>
 			</div>	
 		</div>
@@ -18,11 +18,74 @@
 		<div class="app-fotter">
 			<p>© 2018  5月31号  creat by zhao </p>
 		</div>
+
+
+		<!-- 
+			对话框 dialog组件
+		 -->
+		 <my-dialog :is-show="isDialogLogShow" @onchangDialog="closeDialog('isDialogLogShow')">
+		 	<log-form></log-form>	
+		 </my-dialog>
+
+		 <my-dialog :is-show="isDialogRegShow" @onchangDialog="closeDialog('isDialogRegShow')">
+		 	<reg-form></reg-form>
+		 </my-dialog>
+
+		 <my-dialog :is-show="isDialogAboutShow" @onchangDialog="closeDialog('isDialogAboutShow')">
+		 	<p>
+				易用
+				已经会了 HTML、CSS、JavaScript？即刻阅读指南开始构建应用！
+
+				灵活
+				不断繁荣的生态系统，可以在一个库和一套完整框架之间自如伸缩。
+
+				高效
+				20kB min+gzip 运行大小
+				超快虚拟 DOM
+				最省心的优化
+			</p>
+		 </my-dialog>
+
 	</div>
 </template>
 <script>
+	import dialog from './mydialog'
+	import logForm from './logForm'
+	import regForm from './regForm'
 	export default{
-		name:'pc'
+		name:'pc',
+		data() {
+			return {
+				isDialogLogShow: false,
+				isDialogRegShow: false,
+				isDialogAboutShow: false
+			}
+		},
+		components: {
+			myDialog: dialog,
+			logForm,
+			regForm
+		},
+		methods: {
+
+			logDialog() {
+				this.isDialogLogShow = true;
+			},
+
+			regDialog() {
+				this.isDialogRegShow = true;
+			},
+
+			aboutDialog() {
+				this.isDialogAboutShow = true;
+			},
+
+			closeDialog(arrt) {
+				//arrt是一个变量值,ture，如果想操作的不是这个值而是这个变量，那就把变量以字符串形式传进来，然后已[]去访问修改这个变量
+				//不是用形参赋值，而是想操作这个形参，那只能以字符串形式将变量名传入，然后用[]方式访问赋值
+				this[arrt] = false;
+			}
+		}
 	}
 </script>
 <style>
@@ -73,7 +136,49 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+.button {
+  background: #4fc08d;
+  color: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.button:hover {
+  background: #4fc08d;
+}
+.g-form-line {
+  padding: 15px 0;
+}
+.g-form-label {
+  width: 100px;
+  font-size: 16px;
+  display: inline-block;
+}
+.g-form-input {
+  display: inline-block;
+}
+.g-form-input input {
+  height: 30px;
+  width: 200px;
+  line-height: 30px;
+  vertical-align: middle;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+}
+.g-form-btn {
+  padding-left: 100px;
+}
+.g-form-error {
+  color: red;
+  padding-left: 15px;
+}
+</style>
 
+<style scoped>
+html,body{
+	width: 100%;
+	height: 100%;
+}	
 .app-header{
 	width:100%;
 	height: 90px;

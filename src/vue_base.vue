@@ -201,6 +201,15 @@
       图片的引入：webpack打包需require引入不然不认识
       什么时候需要在(srcript标签里,data选项里引入的src) 可以理解为src是变量就需要require，不然webpack打包不认识
       template&&css知道那是图片路径，但是js不知道是图片路径还是字符串，打包就会出问题
+
+      组件幻灯片(轮播图)思路
+      1.动态的添加img的src就会有切换的效果
+      2.定义切换的共有方法，处理两个极端，开始和结束(使用计算属性(return index))
+      3.使用setInterval执行点击事件，当鼠标移入清除定时器，溢出再执行
+
+
+      注意，position 一定不要漏掉top/left任一值
+          设置一层可以单独控制点击屏幕区域的全屏,不包裹弹框，z-index层级低一些能实现这种效果
       */
 	
 </script>

@@ -46,7 +46,7 @@
 				轮播图组件
 				src是变量需要require
 			 -->
-			<slider :slide="slides" :inv="speed"></slider>
+			<slider :slide="slides" :inv="speed" @onchange="doSomeThingChange"></slider>
 
 			<div class="index-board-list">
 				<!-- 
@@ -187,7 +187,7 @@
 			}
 		},
 		components: {
-			slider
+			slider,
 		},
 		created() {
 			this.$http.get('/api/getNewsList')
@@ -198,6 +198,10 @@
 			})
 		},
 		methods:{
+			doSomeThingChange () {
+				console.log('doSomeThingChange run!');
+			}
+
 		}
 	}
 </script>
