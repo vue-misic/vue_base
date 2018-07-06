@@ -132,6 +132,9 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background: #f0f2f5;
+	font-size: 14px;
+  	color: #444;
 }
 ol, ul {
 	list-style: none;
@@ -208,6 +211,10 @@ html,body{
 	margin: 30px;
 	width: 50px;
 /*	height: 50px; 图片设置宽他就会自己缩放，不要设置高*/
+}
+.app-content{
+	width: 1200px;
+	margin: 0 auto;
 }
 .head-nav{
 	float: right;
