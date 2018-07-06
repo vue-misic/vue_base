@@ -4,7 +4,9 @@
 			<div class="app-head-inner">
 				<img src="../assets/logo.png" class="img" alt="">
 				<div class="head-nav">
-					<div class="app-login" @click="logDialog">登录</div>
+					<div class="app-login" style="font-size: 25px;">{{ name }}</div>
+					<div class="app-login" @click="logDialog" v-if="name == ''">登录</div>
+					<div class="app-login" @click="quit" v-if="!name == ''">退出</div>
 					<div class="app-login" @click="regDialog">注册</div>
 					<div class="app-login" @click="aboutDialog">关于</div>
 				</div>
@@ -24,7 +26,7 @@
 			对话框 dialog组件
 		 -->
 		 <my-dialog :is-show="isDialogLogShow" @onchangDialog="closeDialog('isDialogLogShow')">
-		 	<log-form></log-form>	
+		 	<log-form @has-log="onSuccessLog"></log-form>	
 		 </my-dialog>
 
 		 <my-dialog :is-show="isDialogRegShow" @onchangDialog="closeDialog('isDialogRegShow')">
@@ -58,7 +60,8 @@
 			return {
 				isDialogLogShow: false,
 				isDialogRegShow: false,
-				isDialogAboutShow: false
+				isDialogAboutShow: false,
+				name: ''
 			}
 		},
 		components: {
@@ -84,6 +87,15 @@
 				//arrt是一个变量值,ture，如果想操作的不是这个值而是这个变量，那就把变量以字符串形式传进来，然后已[]去访问修改这个变量
 				//不是用形参赋值，而是想操作这个形参，那只能以字符串形式将变量名传入，然后用[]方式访问赋值
 				this[arrt] = false;
+			},
+			onSuccessLog (message) {
+				this.name = message.username;
+				if(this.name){
+					this.isDialogLogShow = false;
+				}
+			},
+			quit() {
+				this.name = '';
 			}
 		}
 	}

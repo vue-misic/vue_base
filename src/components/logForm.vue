@@ -25,6 +25,7 @@
 			</div>
 
 		</div>
+		<p>{{ errText }}</p>
 	</div>
 </template>
 
@@ -34,7 +35,8 @@
 		data() {
 			return {
 				username: '',
-				password: ''
+				password: '',
+				errText: '',
 			}
 		},
 		//利用计算属性的检测v-model的值来及时的返回是否错误(符合格式)
@@ -73,9 +75,19 @@
 		methods: {
 			onLogin() {
 				if(!this.userError.status || !this.pswError.status) {
-					alert('账号或密码错误');
+
+					this.errText = '部分选项验证不通过'
 				} else {
-					alert('登陆成功');
+					this.$http.get('/api/login')
+					.then((res) => {
+						if(res.data) {
+							this.$emit('has-log',res.data)
+						}
+					},(err) => {
+						console.log(err);
+					})
+					this.errText = ''
+					console.log('login');
 				}
 			}
 		}

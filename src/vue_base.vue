@@ -114,7 +114,7 @@
                     <router-link to='/home'></router-link>(渲染为a标签)
                     <router-link :to='{path:"/home"}'></router-link>(渲染为a标签)
                     挂载到Vue实例的选项里
-                for example: const router = new Router({
+                for example: const router = new vueRouter({
                   routes: [
                     {
                       path:'/home',
@@ -159,7 +159,7 @@
 
                   ]
 
-                  编程式导航
+                  编程式导航(路由如何跳转的处理)
 
                   声明式 =>  1.字符串 <router-link to="/home">
                             2. 对象 <router-link :to="{path:'/home'}">
@@ -167,7 +167,7 @@
                             (声明式如果配置了  如果提供了 path，params会被忽略)
 
                   编程式 => 1.字符串 this.$router.push('home')
-                            2. 对象 this.$router.push({path:'/home${id}'}) => es6方法加进去
+                            2. 对象 this.$router.push({path:'/home?${id}'}) => es6方法加进去
                             3. 路由命名 this.$router.push({name:'home',params:{id:123})">
                             (声明式如果配置了  如果提供了 path，params会被忽略)
                             4.this.$router.push()有历史记录 this.$router.replace() 回去掉历史记录
@@ -176,7 +176,7 @@
                         当路由被点击会自动添加一个类(默认值"router-link-active") 链接激活时使用的 CSS 类名。默认值可以通过路由的构造选项 linkActiveClass 来全局配置
 
 
-          4.添加 Vue 实例方法，通过把它们添加到 Vue.prototype 上实现。
+          4.添加 Vue 实例方法，通过把它们添加到 Vue.prototype(原型) 上实现。
 
 
      */
@@ -210,6 +210,17 @@
 
       注意，position 一定不要漏掉top/left任一值
           设置一层可以单独控制点击屏幕区域的全屏,不包裹弹框，z-index层级低一些能实现这种效果
+
+
+      arrt是一个变量值,ture，如果想操作的不是这个值而是这个变量，那就把变量以字符串形式传进来，然后已[]去访问修改这个变量
+      不是用形参赋值，而是想操作这个形参，那只能以字符串形式将变量名传入，然后用[]方式访问赋值
+
+
+      路由配置(子路由配置)
+      以 / 开头的嵌套路径会被当作根路径。子路由就不要配'/'了=> 顶级路由出口
+      路径与组件存在映射关系
+      嵌套路由:在<router-view></router-view>的顶级出口里还可以嵌套路由<router-view></router-view>
+      它会自动到子路由找router-view
       */
 	
 </script>

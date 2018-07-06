@@ -22,8 +22,12 @@
     }
   ],
   "login": {
-    "username": "yudongdong",
+    "username": "zhaokailei",
     "userId": 123123
+  },
+  "reg": {
+    "userId": 123123,
+    "pwd": 123123
   },
   "getPrice": {
     "amount": 678

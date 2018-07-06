@@ -1,9 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import indexPage from '../page/index'
 import Apple from '@/components/apple'
 import Bananna from '@/components/banannan'
+
+
+
+import indexPage from '../page/index'
+import detailPage from '../page/detail'
+import detailPublishPage from '../page/detail/publish'
+import detailForcastPage from '../page/detail/forcast'
+import detailCountPage from '../page/detail/count'
+import detailAnasPage from '../page/detail/analysis'
 Vue.use(Router)
 
 export default new Router({
@@ -13,6 +21,28 @@ export default new Router({
     {
       path: '/',
       component:indexPage
+    },
+    {
+      path: '/detail',
+      component: detailPage,
+      children: [
+        {
+          path: 'analysis',
+          component: detailAnasPage
+        },
+        {
+          path: 'count',
+          component: detailCountPage
+        },
+        {
+          path: 'forcast',
+          component: detailForcastPage
+        },
+        {
+          path: 'publish',
+          component: detailPublishPage
+        }
+      ]
     },
     // {
     //   path: '/',
