@@ -2,7 +2,9 @@
 	<div class="pc">
 		<div class="app-header">
 			<div class="app-head-inner">
+			<router-link to="/">
 				<img src="../assets/logo.png" class="img" alt="">
+			</router-link>
 				<div class="head-nav">
 					<div class="app-login" style="font-size: 25px;">{{ name }}</div>
 					<div class="app-login" @click="logDialog" v-if="name == ''">登录</div>

@@ -28,29 +28,29 @@
 		            {
 		              name: '数据统计',
 		              path: 'count',
-		              on: false
+		              // on: false
 		            },
 		            {
 		              name: '数据预测',
 		              path: 'forcast',
-		              on: false
+		              // on: false
 		            },
 		            {
 		              name: '流量分析',
 		              path: 'analysis',
-		              on: false
+		              // on: false
 		            },
 		            {
 		              name: '广告发布',
 		              path: 'publish',
-		              on: false
+		              // on: false
 		            }
 			    ],
 			    isMap: {
 			    	'/detail/analysis': require('../assets/images/1.png'),
-			    	'/detail/count': require('../assets/images/2.png'),
+			    	'/detail/count': require('../assets/images/4.png'),
 			    	'/detail/forcast': require('../assets/images/3.png'),
-			    	'/detail/publish': require('../assets/images/4.png'),
+			    	'/detail/publish': require('../assets/images/3.png'),
 			    }
 			}
 		},
