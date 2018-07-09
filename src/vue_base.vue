@@ -172,6 +172,9 @@
                             (声明式如果配置了  如果提供了 path，params会被忽略)
                             4.this.$router.push()有历史记录 this.$router.replace() 回去掉历史记录
 
+
+                            this.$router 访问路由器， this.$route 访问当前路由：
+
                  API => <router-link tag = 'li'> => 默认是a标签 tag渲染为li标签
                         当路由被点击会自动添加一个类(默认值"router-link-active") 链接激活时使用的 CSS 类名。默认值可以通过路由的构造选项 linkActiveClass 来全局配置
 
