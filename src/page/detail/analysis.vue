@@ -11,7 +11,7 @@
 						<p>购买数量</p>
 					</div>
 					<div class="sales-board-line-right">
-						
+						<v-counter></v-counter>
 					</div>
 				</div>
 				<div class="sales-board-line">
@@ -76,6 +76,7 @@
 <script>
 	import vSelection from '../../components/selection'
 	import vChoose from '../../components/choose'
+	import vCounter from '../../components/counter'
 	export default {
 		name: 'analysis',
 		data() {
@@ -112,7 +113,8 @@
 		},
 		components: {
 			vSelection,
-			vChoose
+			vChoose,
+			vCounter
 		},
 		methods: {
 			change() {

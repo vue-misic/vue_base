@@ -33,24 +33,26 @@
 			toggleChooser(index) {
 				if(this.nowIndexs.indexOf(index) === -1) {
 					this.nowIndexs.push(index);
-				} else {
-					// this.arrIntercept(index);
-					// console.log(this.nowIndex);
+				} 
+             else {
+			// 		// this.arrIntercept(index);
+			// 		// console.log(this.nowIndex);
 
-					//成立则赋值,成立则截取这个值 需要传操作的数组和数组的元素
+			// 		//成立则赋值,成立则截取这个值 需要传操作的数组和数组的元素
 					// this.nowIndexs = _.remove(this.nowIndexes, (idx) => {
-						//return 是遇到return当前函数不执行跳出
+						//return 是遇到return当前函数体不执行跳出
 					// 	return idx !== index;
 					// })
 					// console.log(this.nowIndexs);
-
-
-					this.nowIndexes = _.remove(this.nowIndexes, (idx) => {
-			          	return idx !== index
-			        })
-			        console.log( this.nowIndexes );
-
-				}
+                        // 
+				this.nowIndexs = _.remove(this.nowIndexs, (idx) => {
+                    return idx !== index
+                })
+            }
+                let nowObjArray = _.map(this.nowIndexs, (idx) => {
+                    return this.version[idx]
+                })
+                this.$emit('on-change', nowObjArray)	
 			},
 			checkActive(index) {
 				return this.nowIndexs.indexOf(index) !== -1;

@@ -228,6 +228,20 @@
 
       v-for最好与:key一起使用作为标识提高性能
       便它可以跟踪每个节点的标识，从而重用和重新排序现有元素，您需要key为每个项目提供唯一属性。理想的值key是每个项目的唯一ID。这个特殊属性与track-by1.x中的粗略等价，但它的作用类似于属性，因此您需要使用v-bind它将其绑定到动态值（在此使用速记）：
+
+
+      select组件 => 
+        prop的默认值需要跟传过来的值数据保持一致，这样v-for的时候：key才会不会有异常,
+        selections[nowIndex] => 尝试与index绑定关系
+        组件的点击不把数据传递出去时没有意义=>
+
+      choose组件(多选实现实现方式) => 用数组来储存，使用array.indexOf(index)与index建立联系
+      插件lodash的方法 _.remove(arr,(idx) => {
+          return idx !== index  idx参数是数组中的元素  类似splice得到的新数组
+      })
+      _.map(arr,(idx) => {
+        return arr(idx) => 返回数组中有idx值的新数组
+      })
       */
 	
 </script>
