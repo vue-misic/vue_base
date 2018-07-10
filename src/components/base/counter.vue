@@ -3,7 +3,7 @@
         <div class="counter-component">
           <div class="counter-btn" @click="mins"> - </div>
           <div class="counter-show">
-            <input type="text" v-model="number" @keyup="fixNumber">
+            <input type="text" v-model.number="number" @keyup="fixNumber">
           </div>
           <div class="counter-btn" @click="add"> + </div>
         </div>
@@ -25,7 +25,12 @@
       },
       data() {
         return {
-          number: '1'
+          number: 1
+        }
+      },
+      watch: {
+        number (val,oldVal) {
+          this.$emit('on-change', this.number);
         }
       },
       methods: {

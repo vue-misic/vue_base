@@ -11,7 +11,7 @@
 						<p>购买数量</p>
 					</div>
 					<div class="sales-board-line-right">
-						<v-counter></v-counter>
+						<v-counter @on-change="onParamChange('buyNum', $event)"></v-counter>
 					</div>
 				</div>
 				<div class="sales-board-line">
@@ -19,7 +19,7 @@
 						<p>产品类型</p>
 					</div>
 					<div class="sales-board-line-right">
-						<v-selection :selections="buyTypes" @on-change="change"></v-selection>
+						<v-selection :selections="buyTypes" @on-change="onParamChange('buyType', $event)"></v-selection>
 					</div>
 				</div>
 				<div class="sales-board-line">
@@ -27,7 +27,7 @@
 						<p>有效日期</p>
 					</div>
 					<div class="sales-board-line-right">
-						
+						<v-choose :version="periodList" @on-change="onParamChange('period', $event)"></v-choose>
 					</div>
 				</div>
 				<div class="sales-board-line">
@@ -35,7 +35,7 @@
 						<p>产品版本</p>
 					</div>
 					<div class="sales-board-line-right">
-						<v-choose :version="versionList"></v-choose>
+						<multiple-choose :version="versionList" @on-change="onParamChange('version', $event)"></multiple-choose>
 					</div>
 				</div>
 				<div class="sales-board-line">
@@ -43,9 +43,17 @@
 						<p>总价</p>
 					</div>
 					<div class="sales-board-line-right">
-						
+						{{ price }} 元
 					</div>
 				</div>
+				<div class="sales-board-line">
+		            <div class="sales-board-line-left">&nbsp;</div>
+		             	<div class="sales-board-line-right">
+		                  	<div class="button" @click="showDialog">
+		                    	立即购买
+		                  	</div>
+		              	</div>
+		        </div>
 			</div>
 			<div class="sales-board-des">
 				<h2>产品说明</h2>
@@ -70,13 +78,42 @@
 		        </ul>
 			</div>
 		</div>
+		<my-dialog :isShow="showDialogValue" @onchangDialog="changeDialog">
+			<table class="buy-dialog-table">
+				<tr>
+					<th>购买数量</th>
+		            <th>产品类型</th>
+		            <th>有效时间</th>
+		            <th>产品版本</th>
+		            <th>总价</th>
+				</tr>
+				<tr>
+					<td> {{ buyNum }}</td>
+					<td> {{ buyType.label }}</td>
+					<td>{{ period.label }}</td>
+					<td>
+						<span v-for="item in version" :key="item.label">{{ item.label }}</span>
+					</td>
+					<td> {{ price }}</td>
+				</tr>
+			</table>
+			<h3 class="buy-dialog-title">请选择银行</h3>
+			<bank-chooser></bank-chooser>
+			<div class="button buy-dialog-btn">
+          		确认购买
+        	</div>
+		</my-dialog>
 	</div>
 </template>
 
 <script>
-	import vSelection from '../../components/selection'
-	import vChoose from '../../components/choose'
-	import vCounter from '../../components/counter'
+	import vSelection from '../../components/base/selection'
+	import vChoose from '../../components/base/choose'
+	import vCounter from '../../components/base/counter'
+	import multipleChoose from '../../components/base/multipleChoose'
+	import myDialog from '../../components/mydialog'
+	import bankChooser from '../../components/bankChooser'
+	import _ from 'lodash'
 	export default {
 		name: 'analysis',
 		data() {
@@ -108,22 +145,98 @@
 			          label: '高级版',
 			          value: 2
 			        }
-		      ],
+		      	],
+		      	periodList: [
+			        {
+			          label: '半年',
+			          value: 0
+			        },
+			        {
+			          label: '一年',
+			          value: 1
+			        },
+			        {
+			          label: '三年',
+			          value: 2
+			        }
+		      	],
+		      	buyNum: 1,
+		      	buyType: {},
+		      	period: {},
+		      	version: [],
+		      	price: 678,
+		      	showDialogValue: false
 			}
 		},
 		components: {
 			vSelection,
 			vChoose,
-			vCounter
+			vCounter,
+			multipleChoose,
+			myDialog,
+			bankChooser
 		},
 		methods: {
-			change() {
-
+			onParamChange (arrt, val) {
+				this[arrt] = val;
+				this.getPrice();
+			},
+			getPrice () {	
+				let buyVersionArray = _.map(this.version, (item) => {
+					return item.value;
+				})
+				console.log(buyVersionArray);
+				let params = {
+					buyNumber: this.buyNum,
+					buyType: this.buyType.value,
+					period: this.period.value,
+					version: buyVersionArray.join(','),
+					id: 1
+				}
+				this.$http.post('/api/getPrice',params)
+				.then((res) => {
+					console.log(res);
+				}, (err) => {
+					console.log(err);
+				})
+			},
+			showDialog () {
+				this.showDialogValue = true;
+			},
+			changeDialog () {
+				this.showDialogValue = !this.showDialogValue;
 			}
+		},
+		mounted() {
+			this.buyNum = 1;
+	      	this.buyType = this.buyTypes[0];
+	      	this.period = this.periodList[0];
+	      	this.version = [this.versionList[0]]
 		}
-	}
+	} 	
 </script>
 
-<style>
-
+<style scoped>
+.buy-dialog-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+.buy-dialog-btn {
+  margin-top: 20px;
+}
+.buy-dialog-table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.buy-dialog-table td,
+.buy-dialog-table th{
+  border: 1px solid #e3e3e3;
+  text-align: center;
+  padding: 5px 0;
+}
+.buy-dialog-table th {
+  background: #4fc08d;
+  color: #fff;
+  border: 1px solid #4fc08d;
+}
 </style>

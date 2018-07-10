@@ -47,7 +47,7 @@
 			chooseIndex(index) {
 				this.nowIndex = index;
 				//组件的点击不把数据传递出去时没有意义=>
-				this.$emit('on-chang', index)
+				this.$emit('on-change', this.selections[index])
 				this.isDrop = !this.isDrop
 			}
 		}

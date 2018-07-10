@@ -246,7 +246,7 @@
 </template>
 
 <script>
-	import multipleChoose from '../../components/multipleChoose'
+	import multipleChoose from '../../components/base/multipleChoose'
 	export default {
 		name: 'count',
 		data() {

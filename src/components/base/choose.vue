@@ -31,6 +31,7 @@
 		methods: {
 			chooser(index) {
 				this.nowIndex = index;
+				this.$emit('on-change', this.version[index])
 			}
 		}
 

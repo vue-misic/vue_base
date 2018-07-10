@@ -30,7 +30,11 @@
     "pwd": 123123
   },
   "getPrice": {
-    "amount": 678
+    "buyNumber": 1,
+    "buyType": 0,
+    "period": 0,
+    "version": "0,1",
+    "id": 1
   },
   "createOrder": {
     "orderId": "6djk979"

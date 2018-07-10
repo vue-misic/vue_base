@@ -62,7 +62,6 @@
 	.dialog-content{
 		padding: 40px;
 		width: 800px;
-		height: 300px;
 		background-color: #fff;
 		position: absolute;
 		top: 20%;
