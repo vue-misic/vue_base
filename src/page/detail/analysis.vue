@@ -78,7 +78,7 @@
 		        </ul>
 			</div>
 		</div>
-		<my-dialog :isShow="showDialogValue" @onchangDialog="changeDialog">
+		<my-dialog :isShow="isShowPayDialog" @onchangDialog="changeDialog">
 			<table class="buy-dialog-table">
 				<tr>
 					<th>购买数量</th>
@@ -98,11 +98,15 @@
 				</tr>
 			</table>
 			<h3 class="buy-dialog-title">请选择银行</h3>
-			<bank-chooser></bank-chooser>
-			<div class="button buy-dialog-btn">
+			<bank-chooser @on-chooseBank="chooseBank"></bank-chooser>
+			<div class="button buy-dialog-btn" @click="creatOder">
           		确认购买
         	</div>
 		</my-dialog>
+		<my-dialog :isShow="isShowErrDialog"  @onchangDialog="hideErrDialog"></my-dialog>
+
+		<check-order :is-show-check-dialog="isShowCheckOrder" @check-dialog="hideCheckOrder"></check-order>
+
 	</div>
 </template>
 
@@ -113,6 +117,7 @@
 	import multipleChoose from '../../components/base/multipleChoose'
 	import myDialog from '../../components/mydialog'
 	import bankChooser from '../../components/bankChooser'
+	import checkOrder from '../../components/checkOrder'
 	import _ from 'lodash'
 	export default {
 		name: 'analysis',
@@ -164,8 +169,12 @@
 		      	buyType: {},
 		      	period: {},
 		      	version: [],
-		      	price: 678,
-		      	showDialogValue: false
+		      	price: 0,
+		      	isShowPayDialog: false,
+		      	bankId: '',
+		      	orderId: '',
+		      	isShowErrDialog: false,
+		      	isShowCheckOrder: false,
 			}
 		},
 		components: {
@@ -174,7 +183,8 @@
 			vCounter,
 			multipleChoose,
 			myDialog,
-			bankChooser
+			bankChooser,
+			checkOrder
 		},
 		methods: {
 			onParamChange (arrt, val) {
@@ -185,33 +195,67 @@
 				let buyVersionArray = _.map(this.version, (item) => {
 					return item.value;
 				})
-				console.log(buyVersionArray);
 				let params = {
 					buyNumber: this.buyNum,
 					buyType: this.buyType.value,
 					period: this.period.value,
 					version: buyVersionArray.join(','),
-					id: 1
 				}
 				this.$http.post('/api/getPrice',params)
 				.then((res) => {
-					console.log(res);
+					this.price = res.data.amount;
 				}, (err) => {
 					console.log(err);
 				})
 			},
 			showDialog () {
-				this.showDialogValue = true;
+				this.isShowPayDialog = true;
 			},
 			changeDialog () {
-				this.showDialogValue = !this.showDialogValue;
+				this.isShowPayDialog = false;
+			},
+			hideErrDialog () {
+				this.hideErrDialog = false;
+			},
+			chooseBank (bank) {
+				this.bankId = bank;
+			},
+			creatOder () {
+				let buyVersionArray = _.map(this.version, (item) => {
+					return item.value;
+				})
+				let params = {
+					buyNumber: this.buyNum,
+					buyType: this.buyType.value,
+					period: this.period.value,
+					version: buyVersionArray.join(','),
+					bankId: this.bankId
+				}
+				this.$http.post('/api/createOrder')
+				.then((res) => {
+					// console.log(1234)
+					// 这是slot里的button属于父组件不属于组件不要去$emit
+					// this.$emit('onchangDialog')
+					this.orderId = res.data.orderId;
+					console.log(this.orderId)
+					this.isShowPayDialog = false;
+					this.isShowCheckOrder = true;
+
+				}, (err) => {
+					this.isShowErrDialog = true;
+
+				})
+			},
+			hideCheckOrder () {
+				this.isShowCheckOrder = false;
 			}
 		},
 		mounted() {
 			this.buyNum = 1;
 	      	this.buyType = this.buyTypes[0];
 	      	this.period = this.periodList[0];
-	      	this.version = [this.versionList[0]]
+	      	this.version = [this.versionList[0]];
+	      	this.getPrice();
 		}
 	} 	
 </script>

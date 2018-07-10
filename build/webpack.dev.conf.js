@@ -9,17 +9,54 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-const jsonServer = require('json-server')
 
-//配置json-server Mock数据 注意监听的端口
-const apiServer = jsonServer.create()
-const apiRouter = jsonServer.router('db.json')
-const middlewares = jsonServer.defaults()
-apiServer.use(middlewares)
-apiServer.use('/api',apiRouter)
-apiServer.listen(config.dev.port + 1, () => {
-  console.log('JSON Server is running')
+
+
+
+const express = require('express')
+const apiServer = express()
+var bodyParser = require('body-parser')//返回json数据
+apiServer.use(bodyParser.urlencoded({ extended: true }))
+apiServer.use(bodyParser.json())
+var apiRouter = express.Router()
+var fs = require('fs')
+apiRouter.route('/:apiName')
+.all(function (req, res) {
+  fs.readFile('./db.json', 'utf8', function (err, data) {
+    if (err) throw err
+    var data = JSON.parse(data)
+    if (data[req.params.apiName]) {
+      res.json(data[req.params.apiName])//获取端口路径 api name 
+    }
+    else {
+      res.send('no such api name')
+    }
+    
+  })
 })
+
+apiServer.use('/api', apiRouter);//设置api根目录
+apiServer.listen('8081', function (err) {
+  if (err) {
+    console.log(err)
+    return
+  }
+  console.log('Listening at http://localhost:' + ('8081') + '\n')
+})
+
+
+
+
+// const jsonServer = require('json-server')
+//配置json-server Mock数据 注意监听的端口
+// const apiServer = jsonServer.create()
+// const apiRouter = jsonServer.router('db.json')
+// const middlewares = jsonServer.defaults()
+// apiServer.use(middlewares)
+// apiServer.use('/api',apiRouter)
+// apiServer.listen(config.dev.port + 1, () => {
+//   console.log('JSON Server is running')
+// })
 
 
 const HOST = process.env.HOST

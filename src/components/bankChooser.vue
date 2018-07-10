@@ -1,11 +1,14 @@
 <template>
 	<div class="chooser-componenr">
 		<ul class="chooser-list">
+		<!-- 
+			:class = [] => 动态绑定class的数组对象混合
+		 -->
 			<li 
 			v-for="(item, index) in banks" 
 			:key="item.id" 
 			@click="chooseBank(index)"
-			:class="{active: nowIndex === index}">{{ item.label }}</li>
+			:class="[item.name,{active: nowIndex === index}]"></li>
 		</ul>
 	</div>
 </template>
@@ -58,17 +61,18 @@
 			              name: 'zhongxin'
 					}
 		      	],
-		      	methods: {
-		      		chooseBank (index) {
-		      			this.nowIndex = index
-		      		}
-		      	}
 			}
-		}
+		},
+		methods: {
+      		chooseBank (index) {
+      			this.nowIndex = index;
+      			this.$emit('on-chooseBank', this.banks[index].id)
+      		}
+	    }
 	}
 </script>
 
-<style>
+<style scoped>
 .chooser-component {
   position: relative;
   display: inline-block;
@@ -85,5 +89,66 @@
     margin: 5px;
     border: 1px solid #e3e3e3;
     cursor: pointer;
+}
+.zhaoshang {
+    background-position: -2160px 0;
+}
+.jianshe {
+    background-position: -720px 0;
+}
+.pufa {
+    background-position: -1800px 0;
+}
+.jiaotong {
+    background-position: -3120px 0;
+}
+.minsheng {
+    background-position: -2760px 0;
+}
+.pingan {
+    background-position: -2400px 0;
+}
+.beijing {
+    background-position: -960px 0;
+}
+.xingye {
+    background-position: 0 0;
+}
+.shanghai {
+    background-position: -1560px 0;
+}
+.guangfa {
+    background-position: -840px 0;
+}
+.gongshang {
+    background-position: -2640px 0;
+}
+.nongye {
+    background-position: -1680px 0;
+}
+.guangda {
+    background-position: -2280px 0;
+}
+.zhongguo {
+    background-position: -2520px 0;
+}
+.zhongxin {
+    background-position: -480px 0;
+}
+.chuxu {
+    background-position: -120px 0;
+}
+.bnongshang {
+    background-position: -1440px 0;
+}
+.huaxia {
+    background-position: -2040px 0;
+}
+.snongshang {
+    background-position: -2880px 0;
+}
+
+.baifubao {
+    background-position: -1320px 0;
 }
 </style>
