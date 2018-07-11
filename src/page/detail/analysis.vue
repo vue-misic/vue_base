@@ -105,7 +105,7 @@
 		</my-dialog>
 		<my-dialog :isShow="isShowErrDialog"  @onchangDialog="hideErrDialog"></my-dialog>
 
-		<check-order :is-show-check-dialog="isShowCheckOrder" @check-dialog="hideCheckOrder"></check-order>
+		<check-order :is-show-check-dialog="isShowCheckOrder" @check-dialog="hideCheckOrder" :order-id="orderId"></check-order>
 
 	</div>
 </template>
