@@ -26,9 +26,16 @@
 		<div class="order-list-table">
 			<table>
 				<tr>
-					<th v-for="item in tableHeads" :key="item.key">{{ item.label }}</th>
+					<th 
+					v-for="item in tableHeads" 
+					:key="item.key" 
+					@click=changeOrderType(item)
+					:class="{active: item.active}">{{ item.label }}</th>
 				</tr>
-				<tr v-for=""></tr>
+				<tr v-for="order in tableData">
+					<!-- <td v-for="value in order">{{ value }}</td> -->
+					<td v-for="head in tableHeads">{{ order[head.key]}}</td>
+				</tr>
 			</table>
 		</div>
 	</div>
@@ -37,6 +44,7 @@
 <script>
 	import vSelection from '../components/base/selection'
 	import datePicker from '../components/base/datepicker'
+	import _ from 'lodash'
 	export default {
 		name: 'order-wrap',
 		data() {
@@ -93,7 +101,9 @@
 		      	startDate: '',
 		      	endDate: '',
 		      	query: '',
-		      	id: 0
+		      	id: 0,
+		      	hight: false,
+		      	currentOrder: 'asc',
 			}
 		},
 		components: {
@@ -102,11 +112,8 @@
 		},
 		watch: {
 			query (val,oldVal) {
-				console.log(val);
+				this.getTableData();
 			}
-		},
-		beforeMount () {
-			// this.getOrderList()
 		},
 		mounted () {
 			this.getTableData();
@@ -114,14 +121,15 @@
 		methods: {
 			getValueStartDate (date) {
 				this.startDate = date;
-				console.log(date);
+				this.getTableData();
 			},
 			getValueEndDate (date) {
 				this.endDate = date;
-				console.log(date);
+				this.getTableData();
 			},
 			productChange (product) {
 				this.id = product.value;
+				this.getTableData();
 			},
 			getTableData () {
 				let reqParams = {
@@ -132,11 +140,25 @@
 			    }
 				this.$http.post('/api/getOrderList', reqParams)
 				.then((res) => {
-					console.log(res.data);
+					this.tableData = res.data.list;
 				}, (err) => {
 					console.log(res)
 				})
-			}
+			},
+			changeOrderType (headItem) {
+		      	this.tableHeads.map((item) => {
+		        	item.active = false
+		        	return item
+		      	})
+		      	headItem.active = true
+		      	if (this.currentOrder === 'asc') {
+		        	this.currentOrder = 'desc'
+		      	}
+		      	else if (this.currentOrder === 'desc') {
+		        	this.currentOrder = 'asc'
+		      	}
+		      	this.tableData = _.orderBy(this.tableData, headItem.key, this.currentOrder)
+		    }
 		}
 	}
 </script>

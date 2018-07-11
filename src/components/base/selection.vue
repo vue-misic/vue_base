@@ -56,6 +56,9 @@
 </script>
 
 <style scoped>
+.selection{
+	display: inline-block;
+}
 .selection-component {
   position: relative;
   display: inline-block;

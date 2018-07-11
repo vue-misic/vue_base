@@ -67,7 +67,7 @@
 						<h2>{{ item.title }}</h2>
 						<p>{{ item.description}}</p>
 						<div class="index-board-button">
-							<a href="#" class="button">立即购买</a>
+							<a :href="`/detail/${item.toKey}`" class="button">立即购买</a>
 						</div>
 					</div>
 					

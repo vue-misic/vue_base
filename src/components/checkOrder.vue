@@ -57,7 +57,7 @@
 				})
 			},
 			toOrderList () {
-				this.$router.push('/')
+				this.$router.push('/order')
 			}	
 		}
 	}
