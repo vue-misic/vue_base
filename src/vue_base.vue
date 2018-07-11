@@ -258,6 +258,16 @@
 
         组件中引入组件触发只能一层一层的去触发,发布通知到最外层的父组件，例如checkOrder组件引入了mydialog组件
         (vue的原则是在哪里创建就在哪里修改)
+
+
+        父子间通信为 父-->子 props  子-->父 $emit (介质，props.$emit)  => 其实是订阅发布的简写  父组件$on放在了标签，转移到了处理函数放在了methods(没有直接放在mounted的里直接去处理  $on('同一事件名'),处理函数)
+        非父子(如兄弟之间) 通信, 发布订阅模式 eventBus  
+        创建中介层介质是 一个新vue实例 eventBus = new Vue() 导出
+        发布(浏览器点击事件，不是交给this去发布了，交给了中间的新vue实例Bus去发布)，类似子组件 浏览器click原生事件 在methods里去定义发布 this.$emit('事件', 参数)
+        订阅，在mounted里去监听$on('事件',处理函数(message) => {
+  
+        })
+
       */
 	
 </script>

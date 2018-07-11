@@ -13,6 +13,7 @@
 </template>
 
 <script>
+	import { eventBus } from '../eventBus/eventBus'
 	export default{
 		name: 'mydialog',
 		props: {
@@ -26,6 +27,11 @@
 
 				this.$emit('onchangDialog')
 			}
+		},
+		mounted () {
+			eventBus.$on('chengele', (message) => {
+				console.log(message)
+			})
 		}
 	}
 </script>

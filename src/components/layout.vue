@@ -1,5 +1,5 @@
 <template>
-	<div class="pc">
+	<div class="pc" @click="changeBus">
 		<div class="app-header">
 			<div class="app-head-inner">
 			<router-link to="/">
@@ -56,6 +56,7 @@
 	import dialog from './mydialog'
 	import logForm from './logForm'
 	import regForm from './regForm'
+	import { eventBus } from '../eventBus/eventBus'
 	export default{
 		name:'pc',
 		data() {
@@ -98,6 +99,10 @@
 			},
 			quit() {
 				this.name = '';
+			},
+			changeBus () {
+				console.log('qwe')
+				eventBus.$emit('chengele','发布订阅模式')
 			}
 		}
 	}
