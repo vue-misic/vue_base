@@ -8,6 +8,7 @@ import Bananna from '@/components/banannan'
 
 import indexPage from '../page/index'
 import detailPage from '../page/detail'
+import orderPage from '../page/order'
 import detailPublishPage from '../page/detail/publish'
 import detailForcastPage from '../page/detail/forcast'
 import detailCountPage from '../page/detail/count'
@@ -21,6 +22,10 @@ export default new Router({
     {
       path: '/',
       component:indexPage
+    },
+    {
+      path: '/order',
+      component:orderPage
     },
     {
       path: '/detail',

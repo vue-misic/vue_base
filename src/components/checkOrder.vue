@@ -27,7 +27,7 @@
 				default: false
 			},
 			orderId: {
-				type: [String, Number]
+				type: [String, Number],
 				default: ''
 			}	
 		},
