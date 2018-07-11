@@ -14,7 +14,14 @@ npm run dev
 # build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
+#知识点：
+##嵌套路由
+##组件的嵌套
+##涉及VUE组件间的交互
+##本地数据的模拟mock（JSON-server，express)
+##商城类订单的创建与购买页面的业务逻辑
+
+#build for production并查看bundle analyzer报告
 npm run build --report
 ```
 
