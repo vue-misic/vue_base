@@ -1,4 +1,4 @@
-<template>
+  <template>
 	<div class="slide-show"  @mouseover="clearInv" @mouseout="runInv">
 		<div class="slide-img">
 			<!-- 
