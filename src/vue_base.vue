@@ -44,7 +44,7 @@
        9.计算属性 computed: {} 是一个对象，里面定义的函数是要求return 返回值 => 特点 放在comptued 里和放在data里定义的参数变量一样  2. 一版用于对data里的数据二次处理 3.与methods 区别是根据依赖进行缓存，只有依赖值变化次才会出发该函数，methods 每调用一次就会重新获取一遍data里的值
 
        10.wath 是对象 监听属性  监听的是某个Key 的变化, 一旦变化执行某项操作  一般这个KEY在data里有定义，操作也是对data里的数据进行处理  wath:{ 'key'() {
-	     它会默认接受一个新值和旧直
+	     它会默认接受一个新值和旧值
        }}
 
        11.组件的使用(组件树) 跟组件 + n个子组件 => 项目单文件 (实例只创建一次，其他组件以配置文件形式引入)
@@ -55,7 +55,7 @@
         3.动态is切换组件可以使用<keep-live></keep-live> 进行缓存起来
 
         12. 父子组件的数据传递方式   父级 -> 子级 props  (在子组件上自定义属性(不可以用驼峰命名)= 父级data里的数据)
-                props 在子组件里声明可以直接使用(像data里的数据一样使用)
+                props (数组或者对象) 在子组件里声明可以直接使用(像data里的数据一样使用)
                 1.props是数组 props:['my-val'] => 是字符串，在组件上定义什么就是什么 不转换myVal
                   一般用于不需要有默认值的用 数组 字符串形式
                 2.props 是对象 props:{
@@ -92,6 +92,16 @@
         vue 高级功能
 
         1.过渡/动画 (vue的transtion的出发 1.v-if/v-show 2.router的切换 3.动态组件的切换)
+            由初始值切换为true是动态的添加class为 v-enter, v-enter-active
+            切换为初始值为false时为v-leave, v-leave-active
+            v-enter-active,v-leave-enter => 定义过渡曲线
+            v-enter,在刚进入时(ture时) => 定义transform 
+            v-leave-active,在退出为false时 => 定义最后离开那一帧的class应用的样式
+            (enter是刚进入给了一个transform,慢慢恢复为正常状态，leave是将要结束的那一时刻给了一个transforms是要求该元素属性另外一个状态(与元素一起消失掉))
+            这就恰恰是为什么 enter-active是 ture 因为他要显示时要有正常的一个状态，leave-active 非正常状态与false一起消失(如果直接在leave设置，那一帧就消失了transition就没法生效了，太快了)
+            组件是一个组件的离开时leave，一个组件的进入是enter 
+            一个思路就是将要消失的看不见的是leave,显示的将要显示的可以看见的是enter
+            transition name="fade" => 区分不同的动画  mode="out-in"/"in-out" 先出后进/定义新进后出(默认) => 只有组件才会用到这些才有视觉效果
 
 
         2.插件(vue-resource vue-router vuex) => 是独立于vue,拓展完善vue生态(库)，是一套完整的系统
