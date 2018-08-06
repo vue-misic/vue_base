@@ -8,6 +8,10 @@
 	
 </body>
 <script>
+
+  // export {} 与 export default {}的区别
+  // export 只是导出某个变量(对象) 必须使用 export { 变量名 } 语法 => import { 变量名 }
+  // import defalut 是直接导出所有数据 => 然后直接引用就OK
 	//vue自身的Api vue.extend vue.set vue.use vue.component 
 	//vue 自身内置组件 router-view transition component
 	 /**
@@ -119,7 +123,7 @@
           三个点 1.map => 什么样地址访问什么页面 (路径对应的页面(组件),映射关系)
                   routes 是一个数组
                 2.router-view => 页面(组件)显示在哪里
-                <router-view></router-view> 内置组件
+                <router-view></router-view> 内置组件显示区域
                 3.router-link => 如何跳转(点击哪里进行跳转)
                     <router-link to='/home'></router-link>(渲染为a标签)
                     <router-link :to='{path:"/home"}'></router-link>(渲染为a标签)
@@ -161,6 +165,7 @@
                       children跟routes一样是一个路由映射个关系
                       {path:'foo',component:Foo}
                       以 / 开头的嵌套路径会被当作根路径。 这让你充分的使用嵌套组件而无须设置嵌套的路径。
+                      它会找到父组件里的<router-view></router-view>来显示
 
 
                       {path:'',component: Boo}
@@ -277,8 +282,6 @@
         订阅，在mounted里去监听$on('事件',处理函数(message) => {
   
         })
-        
-
 
           简单情况下我们可以通过使用一个空的Vue实例作为中央事件总线
       */
